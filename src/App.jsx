@@ -1,6 +1,6 @@
 import "./index.css";
 import React, { useState, useRef } from "react";
-import Chatbox from "./Chatbox";
+import Modal from "./Modal";
 
 function App() {
   const [isHovered, setIsHovered] = useState(false);
@@ -43,7 +43,7 @@ function App() {
         </div>
       </div>
 
-      {isModalOpen && <Chatbox onClose={handleModalClose} ref={modalRef} />}
+      {isModalOpen && <Modal onClose={handleModalClose} ref={modalRef} />}
     </div>
   );
 }
