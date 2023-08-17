@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
+import Chatbox from "./Chatbox";
 
 const Modal = ({ onClose }) => {
-  useEffect(() => {
-    const el = document.getElementById("messages");
-    el.scrollTop = el.scrollHeight;
-  }, []); // This effect will run only once, after the initial render
-
   const handleModalClick = (e) => {
     e.stopPropagation(); // Prevent the click event from propagating to the parent
   };
@@ -20,6 +16,7 @@ const Modal = ({ onClose }) => {
         onClick={handleModalClick}
       >
         {/* template chatbox */}
+        <Chatbox />
       </div>
     </div>
   );
