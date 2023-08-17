@@ -1,11 +1,23 @@
 import "./index.css";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Modal from "./Modal";
 
 function App() {
   const [isHovered, setIsHovered] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const modalRef = useRef(null);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden"; // Disable scrolling on the body
+    } else {
+      document.body.style.overflow = "auto"; // Enable scrolling on the body
+    }
+
+    return () => {
+      document.body.style.overflow = "auto"; // Reset body overflow on component unmount
+    };
+  }, [isModalOpen]);
 
   const handleButtonClick = () => {
     setIsModalOpen(true);
