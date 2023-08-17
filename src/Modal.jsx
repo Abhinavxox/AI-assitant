@@ -12,7 +12,7 @@ const Modal = ({ onClose }) => {
       onClick={onClose}
     >
       <div
-        className="bg-white p-8 mt-[125px] rounded-md shadow-lg h-[85vh] w-[85%]"
+        className="bg-white p-8 rounded-md shadow-lg h-[95vh] w-[85%]"
         onClick={handleModalClick}
       >
         {/* template chatbox */}
