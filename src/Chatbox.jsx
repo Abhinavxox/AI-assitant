@@ -9,7 +9,7 @@ const Chatbox = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col">
       <div className="flex-grow bg-gray-100 p-4">
         <div className="space-y-4">
           {messages.map((message, index) => (
