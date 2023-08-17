@@ -2,17 +2,22 @@ import React, { useState, useRef, useEffect } from "react";
 
 const Chatbox = () => {
   const [messages, setMessages] = useState([]);
+  const [inputDisabled, setInputDisabled] = useState(false);
   const inputRef = useRef(null);
 
   const handleMessageSend = () => {
     const userMessage = inputRef.current.value;
-    const newMessages = [
-      ...messages,
-      { text: userMessage, sender: "user" },
-      { text: "Hi", sender: "bot" }, // Bot's response
-    ];
+    const newMessages = [...messages, { text: userMessage, sender: "user" }];
     setMessages(newMessages);
+    setInputDisabled(true);
     inputRef.current.value = "";
+
+    setTimeout(() => {
+      const botResponse = { text: "Hi", sender: "bot" };
+      const updatedMessages = [...newMessages, botResponse];
+      setMessages(updatedMessages);
+      setInputDisabled(false);
+    }, 2000); // Wait for 2 seconds before sending the bot response
   };
 
   // Automatically scroll to the bottom of the messages when a new message is added.
@@ -42,10 +47,12 @@ const Chatbox = () => {
             type="text"
             placeholder="Type your message..."
             className="flex-grow border p-2 rounded"
+            disabled={inputDisabled}
           />
           <button
             onClick={handleMessageSend}
             className="bg-blue-500 text-white px-4 py-2 rounded"
+            disabled={inputDisabled}
           >
             Send
           </button>
