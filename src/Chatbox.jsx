@@ -10,11 +10,17 @@ const Chatbox = () => {
     // Define your array of response components here
     <ResponseComponent1 />,
     <ResponseComponent2 />,
+    <ResponseComponent3 />,
+    <ResponseComponent4 />,
     // Add more response components as needed
   ];
 
   const handleMessageSend = () => {
     const userMessage = inputRef.current.value;
+    if (userMessage.trim() === "") {
+      return;
+    }
+
     const newMessages = [...messages, { text: userMessage, sender: "user" }];
     setMessages(newMessages);
     setInputDisabled(true);
@@ -32,6 +38,12 @@ const Chatbox = () => {
       }
       setInputDisabled(false);
     }, 2000); // Wait for 2 seconds before sending the bot response
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleMessageSend();
+    }
   };
 
   // Automatically scroll to the bottom of the messages when a new message is added.
@@ -62,6 +74,7 @@ const Chatbox = () => {
             placeholder="Type your message..."
             className="flex-grow border p-2 rounded"
             disabled={inputDisabled}
+            onKeyPress={handleKeyPress}
           />
           <button
             onClick={handleMessageSend}
@@ -83,7 +96,7 @@ const Message = ({ message }) => {
     <div className={`flex ${isBot ? "ml-auto" : ""} items-center`}>
       {isBot && (
         <img
-          src="https://cdn.britannica.com/22/187222-050-07B17FB6/apples-on-a-tree-branch.jpg"
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Walmart_Spark.svg/1925px-Walmart_Spark.svg.png"
           alt="Bot"
           className="w-8 h-8 rounded-full mr-2"
         />
@@ -138,6 +151,21 @@ const ResponseComponent2 = () => (
       some exciting deals, would you like to see their phone in this price
       range?
     </p>
+  </div>
+);
+
+const ResponseComponent3 = () => (
+  <div>
+    <p>
+      Sure, added iPhone 14 to your cart. Would you like help with anything
+      else?
+    </p>
+  </div>
+);
+
+const ResponseComponent4 = () => (
+  <div>
+    <p>Thank you, Hope you had a great shopping experience!</p>
   </div>
 );
 
